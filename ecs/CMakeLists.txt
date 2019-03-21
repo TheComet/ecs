@@ -18,6 +18,7 @@ add_library (ecs ${ECS_LIB_TYPE}
 target_include_directories (ecs
 	PUBLIC 
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
 		$<INSTALL_INTERFACE:include>)
 
 target_compile_definitions (ecs
