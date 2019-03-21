@@ -1,0 +1,28 @@
+/* --------------------------------------------------------------
+ * Configures prerequisits for this library
+ * --------------------------------------------------------------*/
+
+#ifndef ECS_CONFIG_HPP
+#   define ECS_CONFIG_HPP
+
+    #cmakedefine ECS_HAVE_STDINT_H
+
+#   define ECS_${ECS_LIB_TYPE}
+
+#   if defined(ECS_SHARED)
+#       if defined(ECS_BUILDING)
+#           define ECS_PUBLIC_API ${ECS_API_EXPORT}
+#       else
+#           define ECS_PUBLIC_API ${ECS_API_IMPORT}
+#       endif
+#   else
+#       define ECS_PUBLIC_API
+#   endif
+
+#   if defined (ECS_HAVE_STDINT_H)
+#       include <stdint.h>
+#   else
+#       include "ecs/pstdint.h"
+#   endif
+
+#endif /* ECS_CONFIG_HPP */

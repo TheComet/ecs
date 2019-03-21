@@ -1,0 +1,32 @@
+cmake_minimum_required (VERSION 3.3)
+
+if (NOT DEFINED CMAKE_BUILD_TYPE)
+    set (CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
+endif ()
+
+project (ecs
+	VERSION 0.0.1
+	LANGUAGES CXX)
+
+include (GNUInstallDirs)
+
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+    "${CMAKE_SOURCE_DIR}/CMake/Modules")
+
+include (ConfigureMSVCRuntime)
+set (MSVC_RUNTIME "static")
+configure_msvc_runtime()
+
+if (MSVC)
+    set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+    set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+    set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+    set (PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+else ()
+    set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}")
+    set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}")
+    set (CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}")
+    set (PDB_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}")
+endif ()
+
+add_subdirectory ("ecs")
